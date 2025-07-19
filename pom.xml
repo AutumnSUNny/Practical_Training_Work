@@ -47,16 +47,16 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-<!--        &lt;!&ndash;mybatis起步依赖&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.mybatis.spring.boot</groupId>-->
-<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
-<!--            <version>3.0.3</version>-->
-<!--        </dependency>-->
+        <!--        &lt;!&ndash;mybatis起步依赖&ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.mybatis.spring.boot</groupId>-->
+        <!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
+        <!--            <version>3.0.3</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.5</version>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+            <version>3.5.9</version>
         </dependency>
         <!--mysql驱动-->
         <dependency>
@@ -73,22 +73,22 @@
         </dependency>
 
 
-<!--        &lt;!&ndash;PageHelper分页插件&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.github.pagehelper</groupId>-->
-<!--            <artifactId>pagehelper-spring-boot-starter</artifactId>-->
-<!--            <version>1.4.6</version>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.mybatis</groupId>-->
-<!--                    <artifactId>mybatis</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.mybatis</groupId>-->
-<!--                    <artifactId>mybatis-spring</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
+        <!--        &lt;!&ndash;PageHelper分页插件&ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.github.pagehelper</groupId>-->
+        <!--            <artifactId>pagehelper-spring-boot-starter</artifactId>-->
+        <!--            <version>1.4.6</version>-->
+        <!--            <exclusions>-->
+        <!--                <exclusion>-->
+        <!--                    <groupId>org.mybatis</groupId>-->
+        <!--                    <artifactId>mybatis</artifactId>-->
+        <!--                </exclusion>-->
+        <!--                <exclusion>-->
+        <!--                    <groupId>org.mybatis</groupId>-->
+        <!--                    <artifactId>mybatis-spring</artifactId>-->
+        <!--                </exclusion>-->
+        <!--            </exclusions>-->
+        <!--        </dependency>-->
 
         <!--引入jwt-->
         <dependency>
@@ -112,31 +112,12 @@
 
 
         <dependency>
-            <groupId>org.dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>2.1.4</version>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.37</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.jfinal</groupId>
-            <artifactId>jfinal</artifactId>
-            <version>3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>4.0.5</version>
-        </dependency>
-        <dependency>
-            <groupId>uk.co.jemos.podam</groupId>
-            <artifactId>podam</artifactId>
-            <version>8.0.1.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-            <version>3.1.0-M1</version>
-        </dependency>
+
 
     </dependencies>
 
