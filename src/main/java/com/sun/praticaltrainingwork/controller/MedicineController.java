@@ -2,6 +2,7 @@ package com.sun.praticaltrainingwork.controller;
 
 import com.sun.praticaltrainingwork.domain.DO.TMedicine;
 import com.sun.praticaltrainingwork.domain.DTO.Medicine.MedicineAddRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Medicine.MedicineIdRequest;
 import com.sun.praticaltrainingwork.domain.DTO.Medicine.MedicineQueryRequest;
 import com.sun.praticaltrainingwork.domain.DTO.Medicine.MedicineUpdateRequest;
 import com.sun.praticaltrainingwork.domain.VO.Restful;
@@ -38,7 +39,7 @@ public class MedicineController {
 
     @Operation(summary = "删除药品",description = "删除药品")
     @PostMapping("/delete")
-    public Restful.ResultJson deleteMedicine(@RequestBody MedicineUpdateRequest request){
+    public Restful.ResultJson deleteMedicine(@RequestBody MedicineIdRequest request){
         TMedicine tMedicine= new TMedicine();
         BeanUtils.copyProperties(request,tMedicine);
         return medicineService.deleteMedicine(tMedicine.getId()).toJson();

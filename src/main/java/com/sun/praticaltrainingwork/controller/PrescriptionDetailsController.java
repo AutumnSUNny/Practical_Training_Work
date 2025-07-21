@@ -2,6 +2,7 @@ package com.sun.praticaltrainingwork.controller;
 
 import com.sun.praticaltrainingwork.domain.DO.TPrescriptionDetails;
 import com.sun.praticaltrainingwork.domain.DTO.Prescription.PrescriptionDetailsAddReq;
+import com.sun.praticaltrainingwork.domain.DTO.Prescription.PrescriptionDetailsIdReq;
 import com.sun.praticaltrainingwork.domain.DTO.Prescription.PrescriptionDetailsQueryReq;
 import com.sun.praticaltrainingwork.domain.VO.Restful;
 import com.sun.praticaltrainingwork.service.PrescriptionDetailsService;
@@ -38,7 +39,7 @@ public class PrescriptionDetailsController {
 
     @PostMapping("/delete")
     @Operation(summary = "删除处方明细", description = "根据ID删除处方明细")
-    public Restful.ResultJson deletePrescriptionDetails(@RequestBody PrescriptionDetailsQueryReq req) {
+    public Restful.ResultJson deletePrescriptionDetails(@RequestBody PrescriptionDetailsIdReq req) {
         TPrescriptionDetails prescriptionDetails = new TPrescriptionDetails();
         BeanUtils.copyProperties(req, prescriptionDetails);
         return prescriptionDetailsService.delete(prescriptionDetails.getId()).toJson();
