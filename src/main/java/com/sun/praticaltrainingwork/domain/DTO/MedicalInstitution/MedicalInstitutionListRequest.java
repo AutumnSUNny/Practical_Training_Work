@@ -1,4 +1,4 @@
-package com.sun.praticaltrainingwork.domain.DTO;
+package com.sun.praticaltrainingwork.domain.DTO.MedicalInstitution;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
