@@ -1,21 +1,11 @@
-package com.sun.praticaltrainingwork.domain.DO;
+package com.sun.praticaltrainingwork.domain.VO.PersonnelVisitsInfo;
 
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@TableName("t_personnel_visits_info")
-//人员就诊信息表
-public class TPersonnelVisitsInfo implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @TableId(type = IdType.AUTO)
+public class TPersonnelVisitsInfoVO {
     private Integer id;
 
     private String personID;

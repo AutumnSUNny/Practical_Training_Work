@@ -5,6 +5,7 @@ import com.sun.praticaltrainingwork.domain.DTO.ServiceFacilities.ServiceFaciliti
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.QueryVO;
 import com.sun.praticaltrainingwork.domain.VO.ServiceFacilities.TServiceFacilitiesVO;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 

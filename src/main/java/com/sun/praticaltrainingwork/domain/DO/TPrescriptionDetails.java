@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 @Data
 @TableName("t_prescription_details")
+//处方明细表
 public class TPrescriptionDetails implements Serializable {
     private static final long serialVersionUID = 1L;
 
