@@ -11,6 +11,7 @@ import com.sun.praticaltrainingwork.domain.VO.QueryVO;
 import com.sun.praticaltrainingwork.domain.VO.Disease.TDiseaseVO;
 import com.sun.praticaltrainingwork.mapper.DiseaseMapper;
 import com.sun.praticaltrainingwork.service.DiseaseService;
+import com.sun.praticaltrainingwork.util.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -54,7 +55,7 @@ public class DiseaseServiceImpl implements DiseaseService {
 
         if (sorts != null) {
             for (Map.Entry<String, Boolean> entry : sorts.entrySet()) {
-                String sortField = entry.getKey();
+                String sortField = CommonUtils.camelToUnderline( entry.getKey());
                 boolean isDesc = entry.getValue();
 
                 OrderItem orderItem = new OrderItem();
