@@ -1,8 +1,8 @@
 package com.sun.praticaltrainingwork.controller;
 
 import com.sun.praticaltrainingwork.domain.DO.TPrescriptionDetails;
-import com.sun.praticaltrainingwork.domain.DTO.PrescriptionDetailsAddReq;
-import com.sun.praticaltrainingwork.domain.DTO.PrescriptionDetailsQueryReq;
+import com.sun.praticaltrainingwork.domain.DTO.Prescription.PrescriptionDetailsAddReq;
+import com.sun.praticaltrainingwork.domain.DTO.Prescription.PrescriptionDetailsQueryReq;
 import com.sun.praticaltrainingwork.domain.VO.Restful;
 import com.sun.praticaltrainingwork.service.PrescriptionDetailsService;
 import io.swagger.v3.oas.annotations.Operation;

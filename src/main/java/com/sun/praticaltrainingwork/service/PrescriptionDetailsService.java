@@ -1,10 +1,10 @@
 package com.sun.praticaltrainingwork.service;
 
 import com.sun.praticaltrainingwork.domain.DO.TPrescriptionDetails;
-import com.sun.praticaltrainingwork.domain.DTO.PrescriptionDetailsQueryReq;
+import com.sun.praticaltrainingwork.domain.DTO.Prescription.PrescriptionDetailsQueryReq;
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.QueryVO;
-import com.sun.praticaltrainingwork.domain.VO.TPrescriptionDetailsVO;
+import com.sun.praticaltrainingwork.domain.VO.PrescriptionDetails.TPrescriptionDetailsVO;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

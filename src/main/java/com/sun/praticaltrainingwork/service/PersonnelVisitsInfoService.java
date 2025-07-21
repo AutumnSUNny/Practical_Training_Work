@@ -1,10 +1,10 @@
 package com.sun.praticaltrainingwork.service;
 
 import com.sun.praticaltrainingwork.domain.DO.TPersonnelVisitsInfo;
-import com.sun.praticaltrainingwork.domain.DTO.PersonnelVisitsInfoQueryReq;
+import com.sun.praticaltrainingwork.domain.DTO.PersonnelVisitsInfo.PersonnelVisitsInfoQueryReq;
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.QueryVO;
-import com.sun.praticaltrainingwork.domain.VO.TPersonnelVisitsInfoVO;
+import com.sun.praticaltrainingwork.domain.VO.PersonnelVisitsInfo.TPersonnelVisitsInfoVO;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

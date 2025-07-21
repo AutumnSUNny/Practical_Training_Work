@@ -1,8 +1,8 @@
 package com.sun.praticaltrainingwork.controller;
 
 import com.sun.praticaltrainingwork.domain.DO.TPersonnelVisitsInfo;
-import com.sun.praticaltrainingwork.domain.DTO.PersonnelVisitsInfoAddReq;
-import com.sun.praticaltrainingwork.domain.DTO.PersonnelVisitsInfoQueryReq;
+import com.sun.praticaltrainingwork.domain.DTO.PersonnelVisitsInfo.PersonnelVisitsInfoAddReq;
+import com.sun.praticaltrainingwork.domain.DTO.PersonnelVisitsInfo.PersonnelVisitsInfoQueryReq;
 import com.sun.praticaltrainingwork.domain.VO.Restful;
 import com.sun.praticaltrainingwork.service.PersonnelVisitsInfoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.plaf.SeparatorUI;
 
 @Tag(name="人员就诊信息")
 @RestController
