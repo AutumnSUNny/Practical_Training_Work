@@ -11,6 +11,7 @@ import com.sun.praticaltrainingwork.domain.VO.Medicine.MedicineVO;
 import com.sun.praticaltrainingwork.domain.VO.QueryVO;
 import com.sun.praticaltrainingwork.mapper.MedicineMapper;
 import com.sun.praticaltrainingwork.service.MedicineService;
+import com.sun.praticaltrainingwork.util.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -63,7 +64,7 @@ public class MedicineServiceImpl implements MedicineService {
         // 2. 处理排序条件
         if (sorts != null && !sorts.isEmpty()) {
             for (Map.Entry<String, Boolean> entry : sorts.entrySet()) {
-                String sortField = entry.getKey();
+                String sortField = CommonUtils.camelToUnderline(entry.getKey());
                 boolean isAsc = entry.getValue();
                 OrderItem orderItem = new OrderItem();
                 orderItem.setColumn(sortField);

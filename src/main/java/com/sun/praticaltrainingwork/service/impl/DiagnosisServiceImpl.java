@@ -11,6 +11,7 @@ import com.sun.praticaltrainingwork.domain.VO.QueryVO;
 import com.sun.praticaltrainingwork.domain.VO.Diagnosis.TDiagnosisProjectVO;
 import com.sun.praticaltrainingwork.mapper.DiagnosisMapper;
 import com.sun.praticaltrainingwork.service.DiagnosisService;
+import com.sun.praticaltrainingwork.util.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -55,7 +56,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         if (sorts != null) {
             //按排序字段顺序优先级排序,降序为true,升序为false
             for (Map.Entry<String, Boolean> entry : sorts.entrySet()) {
-                String sortField = entry.getKey();
+                String sortField = CommonUtils.camelToUnderline(entry.getKey());
                 boolean isDesc = entry.getValue();
                 OrderItem orderItem = new OrderItem();
                 orderItem.setColumn(sortField);
