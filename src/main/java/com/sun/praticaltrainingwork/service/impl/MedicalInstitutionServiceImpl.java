@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sun.praticaltrainingwork.domain.DO.TMedicalInsititution;
-import com.sun.praticaltrainingwork.domain.DTO.DiagnosisListRequest;
 import com.sun.praticaltrainingwork.domain.DTO.MedicalInstitutionListRequest;
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.MedicalInstitutionVO;

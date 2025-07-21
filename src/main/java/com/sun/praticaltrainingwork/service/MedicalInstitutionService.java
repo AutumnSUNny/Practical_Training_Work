@@ -1,8 +1,6 @@
 package com.sun.praticaltrainingwork.service;
 
-import com.baomidou.mybatisplus.core.handlers.IJsonTypeHandler;
 import com.sun.praticaltrainingwork.domain.DO.TMedicalInsititution;
-import com.sun.praticaltrainingwork.domain.DTO.DiagnosisListRequest;
 import com.sun.praticaltrainingwork.domain.DTO.MedicalInstitutionListRequest;
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.MedicalInstitutionVO;
