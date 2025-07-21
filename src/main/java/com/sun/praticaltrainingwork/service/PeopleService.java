@@ -1,18 +1,16 @@
 package com.sun.praticaltrainingwork.service;
 
-
 import com.sun.praticaltrainingwork.domain.DO.People;
-
 import com.sun.praticaltrainingwork.domain.DTO.People.PeopleListRequest;
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.People.PeopleVO;
 import com.sun.praticaltrainingwork.domain.VO.QueryVO;
 
-import org.springframework.stereotype.Service;
 import java.util.Map;
 
-@Service
 public interface PeopleService {
+    Result<Object> queryPeopleAndUnits(String id);
+
     Result<Void> addPeople(People people);
 
     Result<Void> deletePeople(Integer id);
@@ -25,4 +23,5 @@ public interface PeopleService {
             Map<String, Boolean> sorts,
             PeopleListRequest.Conditions conditions
     );
+
 }

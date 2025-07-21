@@ -1,18 +1,14 @@
 package com.sun.praticaltrainingwork.service.impl;
 
-
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sun.praticaltrainingwork.domain.DO.People;
-
 import com.sun.praticaltrainingwork.domain.DTO.People.PeopleListRequest;
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.People.PeopleVO;
 import com.sun.praticaltrainingwork.domain.VO.QueryVO;
-
 import com.sun.praticaltrainingwork.mapper.PeopleMapper;
 import com.sun.praticaltrainingwork.service.PeopleService;
 import com.sun.praticaltrainingwork.util.CommonUtils;
@@ -21,14 +17,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Map;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
+@Slf4j
 public class PeopleServiceImpl implements PeopleService {
 
     private final PeopleMapper peopleMapper;
+
+    @Override
+    public Result<Object> queryPeopleAndUnits(String id) {
+        // 使用自定义SQl连表查询
+        try {
+            return Result.success(peopleMapper.queryPeopleAndUnits(id));
+        } catch (Exception e) {
+            log.error("查询人员信息和单位信息失败", e);
+            return Result.failure(new RuntimeException("查询人员信息和单位信息失败"));
+        }
+    }
 
     @Override
     public Result<Void> addPeople(People people) {
