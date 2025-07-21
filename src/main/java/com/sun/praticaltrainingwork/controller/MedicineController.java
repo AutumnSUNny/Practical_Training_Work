@@ -1,5 +1,6 @@
 package com.sun.praticaltrainingwork.controller;
 
+import ch.qos.logback.classic.Logger;
 import com.sun.praticaltrainingwork.domain.DO.TMedicine;
 import com.sun.praticaltrainingwork.domain.DTO.MedicineAddRequest;
 import com.sun.praticaltrainingwork.domain.DTO.MedicineQueryRequest;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.swing.*;
 
 @Tag(name="药品信息管理")
 @RestController
@@ -33,6 +36,7 @@ public class MedicineController {
     public Restful.ResultJson updateMedicine(@RequestBody MedicineUpdateRequest request){
         TMedicine tMedicine= new TMedicine();
         BeanUtils.copyProperties(request,tMedicine);
+        System.out.println(tMedicine);
         return medicineService.updateMedicine(tMedicine).toJson();
     }
 
@@ -46,8 +50,6 @@ public class MedicineController {
     @Operation(summary = "查询药品",description = "查询药品")
     @PostMapping("/query")
     public Restful.ResultJson queryMedicine(@RequestBody MedicineQueryRequest request){
-        TMedicine tMedicine= new TMedicine();
-        BeanUtils.copyProperties(request,tMedicine);
         return medicineService.queryMedicine(request.getPageNum(),request.getPageSize(),
                 request.getSorts(),request.getConditions()).toJson();
     }

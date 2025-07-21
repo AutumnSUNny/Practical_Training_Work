@@ -5,9 +5,11 @@ import com.sun.praticaltrainingwork.domain.DTO.ServiceFacilitiesListRequest;
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.QueryVO;
 import com.sun.praticaltrainingwork.domain.VO.TServiceFacilitiesVO;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+@Service
 public interface ServiceFacilitiesService {
     Result<Void> add(TServiceFacilities entity);
 

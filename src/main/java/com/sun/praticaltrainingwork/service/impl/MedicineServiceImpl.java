@@ -38,14 +38,14 @@ public class MedicineServiceImpl implements MedicineService {
     public Result<Void> updateMedicine(TMedicine tMedicine) {
         log.info("修改药品");
         medicineMapper.updateById(tMedicine);
-        return null;
+        return Result.success(null);
     }
 
     @Override
     public Result<Void> deleteMedicine(Integer id) {
         log.info("删除药品");
         medicineMapper.deleteById(id);
-        return null;
+        return Result.success(null);
     }
 
     @Override
