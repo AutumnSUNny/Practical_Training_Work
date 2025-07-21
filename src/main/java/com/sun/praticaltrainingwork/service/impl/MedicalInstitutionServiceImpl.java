@@ -11,6 +11,7 @@ import com.sun.praticaltrainingwork.domain.VO.MedicalInstitution.MedicalInstitut
 import com.sun.praticaltrainingwork.domain.VO.QueryVO;
 import com.sun.praticaltrainingwork.mapper.MedicalInsititutionMapper;
 import com.sun.praticaltrainingwork.service.MedicalInstitutionService;
+import com.sun.praticaltrainingwork.util.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -68,7 +69,7 @@ public class MedicalInstitutionServiceImpl implements MedicalInstitutionService 
         // 处理排序
         if (sorts != null) {
             for (Map.Entry<String, Boolean> entry : sorts.entrySet()) {
-                String sortField = entry.getKey();
+                String sortField = CommonUtils.camelToUnderline( entry.getKey());
                 boolean isDesc = entry.getValue();
 
                 OrderItem orderItem = new OrderItem();
