@@ -1,12 +1,10 @@
 package com.sun.praticaltrainingwork.service;
 
 import com.sun.praticaltrainingwork.domain.DO.TMedicine;
-import com.sun.praticaltrainingwork.domain.DTO.MedicineAddRequest;
-import com.sun.praticaltrainingwork.domain.DTO.MedicineQueryRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Medicine.MedicineQueryRequest;
 import com.sun.praticaltrainingwork.domain.Result;
-import com.sun.praticaltrainingwork.domain.VO.MedicineVO;
+import com.sun.praticaltrainingwork.domain.VO.Medicine.MedicineVO;
 import com.sun.praticaltrainingwork.domain.VO.QueryVO;
-import com.sun.praticaltrainingwork.domain.VO.Restful;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

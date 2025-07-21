@@ -1,11 +1,12 @@
-package com.sun.praticaltrainingwork.domain.DTO;
+package com.sun.praticaltrainingwork.domain.VO.ServiceFacilities;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class ServiceFacilitiesAddRequest {
+public class TServiceFacilitiesVO {
+    private Integer id;
     private String serId;
     private String serName;
     private String serExpType;
