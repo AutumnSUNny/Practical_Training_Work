@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 
 @Data
 @TableName("personal_annual_expenses")
+//个人年度费用累计信息
 public class PersonalAnnualExpenses implements Serializable {
     private static final long serialVersionUID = 1L;
 

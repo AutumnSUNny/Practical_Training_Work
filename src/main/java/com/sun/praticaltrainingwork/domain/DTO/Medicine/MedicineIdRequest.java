@@ -3,6 +3,6 @@ package com.sun.praticaltrainingwork.domain.DTO.Medicine;
 import lombok.Data;
 
 @Data
-public class MedicineUpdateRequest extends MedicineAddRequest {
+public class MedicineIdRequest {
     private Integer id;
 }
