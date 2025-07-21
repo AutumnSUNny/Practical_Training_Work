@@ -1,22 +1,12 @@
-package com.sun.praticaltrainingwork.domain.DO;
+package com.sun.praticaltrainingwork.domain.VO;
 
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-//药品表
 @Data
-@TableName("t_medicine")
-public class TMedicine implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @TableId(type = IdType.AUTO)
+public class MedicineVO {
     private Integer id;
 
     private String medId;

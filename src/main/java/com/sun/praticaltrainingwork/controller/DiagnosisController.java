@@ -55,5 +55,4 @@ public class DiagnosisController {
     public ResultJson queryDiagnosis(@RequestBody DiagnosisListRequest request) {
         return diagnosisService.queryDiagnosis(request.getPageNum(),request.getPageSize(),request.getSorts(),request.getConditions()).toJson();
     }
-
 }
