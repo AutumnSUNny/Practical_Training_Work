@@ -1,9 +1,14 @@
-package com.sun.praticaltrainingwork.domain.DTO;
+package com.sun.praticaltrainingwork.domain.VO.Medicine;
+
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class MedicineAddRequest {
+@Data
+public class MedicineVO {
+    private Integer id;
+
     private String medId;
 
     private String medName;

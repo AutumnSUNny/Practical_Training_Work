@@ -2,10 +2,10 @@ package com.sun.praticaltrainingwork.controller;
 
 
 import com.sun.praticaltrainingwork.domain.DO.TDiagnosisProject;
-import com.sun.praticaltrainingwork.domain.DTO.DiagnosisAddRequest;
-import com.sun.praticaltrainingwork.domain.DTO.DiagnosisIdRequest;
-import com.sun.praticaltrainingwork.domain.DTO.DiagnosisListRequest;
-import com.sun.praticaltrainingwork.domain.DTO.DiagnosisUpdRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Diagnosis.DiagnosisAddRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Diagnosis.DiagnosisIdRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Diagnosis.DiagnosisListRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Diagnosis.DiagnosisUpdRequest;
 import com.sun.praticaltrainingwork.domain.VO.Restful.ResultJson;
 import com.sun.praticaltrainingwork.service.DiagnosisService;
 import io.swagger.v3.oas.annotations.Operation;

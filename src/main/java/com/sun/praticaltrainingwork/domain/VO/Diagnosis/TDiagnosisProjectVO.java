@@ -1,4 +1,4 @@
-package com.sun.praticaltrainingwork.domain.VO;
+package com.sun.praticaltrainingwork.domain.VO.Diagnosis;
 
 import java.math.BigDecimal;
 import java.util.Date;

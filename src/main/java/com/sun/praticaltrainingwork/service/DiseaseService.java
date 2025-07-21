@@ -1,10 +1,10 @@
 package com.sun.praticaltrainingwork.service;
 
 import com.sun.praticaltrainingwork.domain.DO.TDisease;
-import com.sun.praticaltrainingwork.domain.DTO.DiseaseListRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Disease.DiseaseListRequest;
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.QueryVO;
-import com.sun.praticaltrainingwork.domain.VO.TDiseaseVO;
+import com.sun.praticaltrainingwork.domain.VO.Disease.TDiseaseVO;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

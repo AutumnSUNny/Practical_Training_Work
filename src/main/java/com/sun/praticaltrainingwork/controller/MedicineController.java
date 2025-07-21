@@ -1,9 +1,9 @@
 package com.sun.praticaltrainingwork.controller;
 
 import com.sun.praticaltrainingwork.domain.DO.TMedicine;
-import com.sun.praticaltrainingwork.domain.DTO.MedicineAddRequest;
-import com.sun.praticaltrainingwork.domain.DTO.MedicineQueryRequest;
-import com.sun.praticaltrainingwork.domain.DTO.MedicineUpdateRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Medicine.MedicineAddRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Medicine.MedicineQueryRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Medicine.MedicineUpdateRequest;
 import com.sun.praticaltrainingwork.domain.VO.Restful;
 import com.sun.praticaltrainingwork.service.MedicineService;
 import io.swagger.v3.oas.annotations.Operation;

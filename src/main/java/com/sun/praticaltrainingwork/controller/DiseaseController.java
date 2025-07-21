@@ -1,7 +1,10 @@
 package com.sun.praticaltrainingwork.controller;
 
 import com.sun.praticaltrainingwork.domain.DO.TDisease;
-import com.sun.praticaltrainingwork.domain.DTO.*;
+import com.sun.praticaltrainingwork.domain.DTO.Disease.DiseaseAddRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Disease.DiseaseIdRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Disease.DiseaseListRequest;
+import com.sun.praticaltrainingwork.domain.DTO.Disease.DiseaseUpdRequest;
 import com.sun.praticaltrainingwork.domain.VO.Restful.ResultJson;
 import com.sun.praticaltrainingwork.service.DiseaseService;
 import io.swagger.v3.oas.annotations.Operation;

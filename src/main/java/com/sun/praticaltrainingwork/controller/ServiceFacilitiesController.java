@@ -1,10 +1,10 @@
 package com.sun.praticaltrainingwork.controller;
 
 import com.sun.praticaltrainingwork.domain.DO.TServiceFacilities;
-import com.sun.praticaltrainingwork.domain.DTO.ServiceFacilitiesAddRequest;
-import com.sun.praticaltrainingwork.domain.DTO.ServiceFacilitiesIdRequest;
-import com.sun.praticaltrainingwork.domain.DTO.ServiceFacilitiesListRequest;
-import com.sun.praticaltrainingwork.domain.DTO.ServiceFacilitiesUpdRequest;
+import com.sun.praticaltrainingwork.domain.DTO.ServiceFacilities.ServiceFacilitiesAddRequest;
+import com.sun.praticaltrainingwork.domain.DTO.ServiceFacilities.ServiceFacilitiesIdRequest;
+import com.sun.praticaltrainingwork.domain.DTO.ServiceFacilities.ServiceFacilitiesListRequest;
+import com.sun.praticaltrainingwork.domain.DTO.ServiceFacilities.ServiceFacilitiesUpdRequest;
 import com.sun.praticaltrainingwork.domain.VO.Restful.ResultJson;
 import com.sun.praticaltrainingwork.service.ServiceFacilitiesService;
 import io.swagger.v3.oas.annotations.Operation;

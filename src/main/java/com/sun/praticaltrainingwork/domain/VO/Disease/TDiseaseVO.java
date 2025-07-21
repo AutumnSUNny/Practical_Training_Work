@@ -1,4 +1,4 @@
-package com.sun.praticaltrainingwork.domain.VO;
+package com.sun.praticaltrainingwork.domain.VO.Disease;
 
 import lombok.Data;
 
