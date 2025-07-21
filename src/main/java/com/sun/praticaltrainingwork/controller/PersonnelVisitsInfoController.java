@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class PersonnelVisitsInfoController {
     private final PersonnelVisitsInfoService personnelVisitsInfoService;
-    @PostMapping
+    @PostMapping("/add")
     @Operation(summary = "新增就诊信息",description = "新增就诊信息")
     public Restful.ResultJson addPersonnelVisitInfo(PersonnelVisitsInfoAddReq req){
         TPersonnelVisitsInfo tPersonnelVisitsInfo = new TPersonnelVisitsInfo();
@@ -26,7 +26,7 @@ public class PersonnelVisitsInfoController {
         return personnelVisitsInfoService.add(tPersonnelVisitsInfo).toJson();
     }
 
-    @PutMapping
+    @PostMapping("/update")
     @Operation(summary = "修改就诊信息 ",description = "修改就诊信息")
     public Restful.ResultJson update(PersonnelVisitsInfoAddReq req){
         TPersonnelVisitsInfo tPersonnelVisitsInfo = new TPersonnelVisitsInfo();
@@ -34,10 +34,12 @@ public class PersonnelVisitsInfoController {
         return personnelVisitsInfoService.update(tPersonnelVisitsInfo).toJson();
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/delete")
     @Operation(summary = "删除就诊信息",description = "删除就诊信息")
-    public Restful.ResultJson deletePersonnelVisitInfo(@PathVariable Integer id){
-        return personnelVisitsInfoService.delete(id).toJson();
+    public Restful.ResultJson deletePersonnelVisitInfo(@RequestBody PersonnelVisitsInfoQueryReq req){
+        TPersonnelVisitsInfo tPersonnelVisitsInfo = new TPersonnelVisitsInfo();
+        BeanUtils.copyProperties(req,tPersonnelVisitsInfo);
+        return personnelVisitsInfoService.delete(tPersonnelVisitsInfo.getId()).toJson();
     }
 
     @PostMapping("/query")

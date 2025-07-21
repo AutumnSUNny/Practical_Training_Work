@@ -21,7 +21,7 @@ public class MedicineController {
     private final MedicineService medicineService;
 
     @Operation(summary = "新增药品",description = "新增药品")
-    @PostMapping
+    @PostMapping("/add")
     public Restful.ResultJson addMedicine(@RequestBody MedicineAddRequest request){
         TMedicine tMedicine= new TMedicine();
         BeanUtils.copyProperties(request,tMedicine);
@@ -29,19 +29,19 @@ public class MedicineController {
     }
 
     @Operation(summary = "修改药品",description = "修改药品")
-    @PutMapping
+    @PostMapping("/update")
     public Restful.ResultJson updateMedicine(@RequestBody MedicineUpdateRequest request){
         TMedicine tMedicine= new TMedicine();
         BeanUtils.copyProperties(request,tMedicine);
-        System.out.println(tMedicine);
         return medicineService.updateMedicine(tMedicine).toJson();
     }
 
     @Operation(summary = "删除药品",description = "删除药品")
-    @DeleteMapping("/{id}")
-    public Restful.ResultJson deleteMedicine(@PathVariable Integer id){
+    @PostMapping("/delete")
+    public Restful.ResultJson deleteMedicine(@RequestBody MedicineUpdateRequest request){
         TMedicine tMedicine= new TMedicine();
-        return medicineService.deleteMedicine(id).toJson();
+        BeanUtils.copyProperties(request,tMedicine);
+        return medicineService.deleteMedicine(tMedicine.getId()).toJson();
     }
 
     @Operation(summary = "查询药品",description = "查询药品")

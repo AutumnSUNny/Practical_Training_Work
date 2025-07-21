@@ -20,7 +20,7 @@ public class PrescriptionDetailsController {
 
     private final PrescriptionDetailsService prescriptionDetailsService;
 
-    @PostMapping
+    @PostMapping("/add")
     @Operation(summary = "新增处方明细", description = "新增处方明细信息")
     public Restful.ResultJson addPrescriptionDetails(@RequestBody PrescriptionDetailsAddReq req) {
         TPrescriptionDetails prescriptionDetails = new TPrescriptionDetails();
@@ -28,7 +28,7 @@ public class PrescriptionDetailsController {
         return prescriptionDetailsService.add(prescriptionDetails).toJson();
     }
 
-    @PutMapping
+    @PostMapping("/update")
     @Operation(summary = "修改处方明细", description = "修改处方明细信息")
     public Restful.ResultJson updatePrescriptionDetails(@RequestBody PrescriptionDetailsAddReq req) {
         TPrescriptionDetails prescriptionDetails = new TPrescriptionDetails();
@@ -36,10 +36,12 @@ public class PrescriptionDetailsController {
         return prescriptionDetailsService.update(prescriptionDetails).toJson();
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/delete")
     @Operation(summary = "删除处方明细", description = "根据ID删除处方明细")
-    public Restful.ResultJson deletePrescriptionDetails(@PathVariable Integer id) {
-        return prescriptionDetailsService.delete(id).toJson();
+    public Restful.ResultJson deletePrescriptionDetails(@RequestBody PrescriptionDetailsQueryReq req) {
+        TPrescriptionDetails prescriptionDetails = new TPrescriptionDetails();
+        BeanUtils.copyProperties(req, prescriptionDetails);
+        return prescriptionDetailsService.delete(prescriptionDetails.getId()).toJson();
     }
 
     @PostMapping("/query")
