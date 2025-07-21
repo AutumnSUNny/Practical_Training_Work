@@ -1,10 +1,10 @@
 package com.sun.praticaltrainingwork.controller;
 
 import com.sun.praticaltrainingwork.domain.DO.TMedicalInsititution;
-import com.sun.praticaltrainingwork.domain.DTO.MedicalInstitutionAddRequest;
-import com.sun.praticaltrainingwork.domain.DTO.MedicalInstitutionIdRequest;
-import com.sun.praticaltrainingwork.domain.DTO.MedicalInstitutionListRequest;
-import com.sun.praticaltrainingwork.domain.DTO.MedicalInstitutionUpdRequest;
+import com.sun.praticaltrainingwork.domain.DTO.MedicalInstitution.MedicalInstitutionAddRequest;
+import com.sun.praticaltrainingwork.domain.DTO.MedicalInstitution.MedicalInstitutionIdRequest;
+import com.sun.praticaltrainingwork.domain.DTO.MedicalInstitution.MedicalInstitutionListRequest;
+import com.sun.praticaltrainingwork.domain.DTO.MedicalInstitution.MedicalInstitutionUpdRequest;
 import com.sun.praticaltrainingwork.domain.VO.Restful.ResultJson;
 import com.sun.praticaltrainingwork.service.MedicalInstitutionService;
 import io.swagger.v3.oas.annotations.Operation;
