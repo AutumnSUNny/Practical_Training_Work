@@ -8,6 +8,7 @@ import com.sun.praticaltrainingwork.domain.VO.ServiceFacilities.TServiceFaciliti
 
 import java.util.Map;
 
+@Service
 public interface ServiceFacilitiesService {
     Result<Void> add(TServiceFacilities entity);
 
