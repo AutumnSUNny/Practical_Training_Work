@@ -3,6 +3,7 @@ package com.sun.praticaltrainingwork.domain.DTO.Medicine;
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Data
 public class MedicineAddRequest {
     private String medId;
 
