@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sun.praticaltrainingwork.mapper.PeopleMapper">
+    <select id="queryPeopleAndUnits" resultType="java.lang.Object">
+        select *
+        from people p
+        left join company c on p.company_id = c.company_id;
+    </select>
+</mapper>
