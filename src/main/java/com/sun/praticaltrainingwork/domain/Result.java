@@ -4,6 +4,7 @@ import com.sun.praticaltrainingwork.domain.VO.Restful;
 import lombok.Getter;
 
 
+import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -28,6 +29,11 @@ public final class Result<T> {
     // 失败工厂方法（支持自定义错误码）
     public static <T> Result<T> failure(Throwable error, int errorCode) {
         return new Result<>(null, error, errorCode);
+    }
+
+    public static <T> Result<T> failure(Throwable error) {
+        int code =400;
+        return new Result<>(null, error, code);
     }
 
     // 链式处理：成功时消费值，失败时不操作
