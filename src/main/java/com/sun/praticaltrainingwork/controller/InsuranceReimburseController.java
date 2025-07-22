@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name="医保报销管理")
 @Slf4j
 @RestController
-@RequestMapping("/api/insurance")
+@RequestMapping("/insurance")
 @RequiredArgsConstructor
 public class InsuranceReimburseController {
     private final InsuranceReimburseService insuranceReimburseService;
