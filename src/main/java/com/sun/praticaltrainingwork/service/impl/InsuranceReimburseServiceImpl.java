@@ -25,7 +25,7 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
     private final PrescriptionDetailsMapper prescriptionMapper;
     private final MinimumPaymentStandardMapper minStandardMapper;
     private final IndividualSegementSelfFundedRatioMapper ratioMapper;
-    private final SettlementNegativeRecordsMapper negativeMaper;
+    private final SettlementNegativeRecordsMapper negativeMapper;
 
     // 1. 计算报销并保存
     @Override
