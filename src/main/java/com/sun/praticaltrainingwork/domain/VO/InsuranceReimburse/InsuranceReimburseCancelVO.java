@@ -1,16 +1,17 @@
 package com.sun.praticaltrainingwork.domain.VO.InsuranceReimburse;
 
-import lombok.Data;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class InsuranceReimburseVO {
+@AllArgsConstructor
+public class InsuranceReimburseCancelVO {
+    private Long id; // 结算记录ID
     private String hospitalizationNumber; // 住院号
     private Integer peopleId; // 人员ID
     private BigDecimal totalAmount; // 总金额

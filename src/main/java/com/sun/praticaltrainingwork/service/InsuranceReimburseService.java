@@ -1,11 +1,15 @@
 package com.sun.praticaltrainingwork.service;
 
-import com.baomidou.mybatisplus.core.handlers.IJsonTypeHandler;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.sun.praticaltrainingwork.domain.DO.SettlementRecords;
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.InsuranceReimburse.InsuranceReimburseVO;
-import org.springframework.stereotype.Service;
+import com.sun.praticaltrainingwork.domain.VO.QueryVO;
 
-@Service
-public interface InsuranceReimburseService {
-    Result<InsuranceReimburseVO> insuranceReimburse(Integer peopleId, String hospitalGrade, String hospitalizationNumber, String medicalCategory, String medicalPersonnel);
+public interface InsuranceReimburseService extends IService<SettlementRecords> {
+    // 核心方法参数改为DO
+    Result<InsuranceReimburseVO> calculateAndSaveReimburse(SettlementRecords record);
+    Result <QueryVO<InsuranceReimburseVO>>  queryReimburseByHospitalNo(String hospitalizationNumber);
+    Result<String> cancelReimburse(SettlementRecords record);
+    Result<String> confirmPayment(String hospitalizationNumber);
 }

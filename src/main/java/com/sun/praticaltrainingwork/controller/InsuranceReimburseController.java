@@ -1,30 +1,55 @@
 package com.sun.praticaltrainingwork.controller;
 
-import com.sun.praticaltrainingwork.domain.DTO.InsuranceReimburse.InsuranceReimburseReq;
-import com.sun.praticaltrainingwork.domain.Result;
-import com.sun.praticaltrainingwork.domain.VO.InsuranceReimburse.InsuranceReimburseVO;
+import com.sun.praticaltrainingwork.domain.DTO.InsuranceReimburse.*;
+import com.sun.praticaltrainingwork.domain.DO.SettlementRecords;
 import com.sun.praticaltrainingwork.domain.VO.Restful;
 import com.sun.praticaltrainingwork.service.InsuranceReimburseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name="医保报销管理")
 @Slf4j
 @RestController
-@RequiredArgsConstructor(onConstructor = @__(@Autowired)) // 修正注解语法
+@RequestMapping("/api/insurance")
+@RequiredArgsConstructor
 public class InsuranceReimburseController {
     private final InsuranceReimburseService insuranceReimburseService;
 
-    @Operation(summary = "计算报销后结果",description = "计算报销后结果")
-    @PostMapping
-    public Restful.ResultJson InsuranceReimburse(InsuranceReimburseReq req) {
-        return insuranceReimburseService.insuranceReimburse(req.getPeopleId(),req.getHospitalGrade(),
-                req.getHospitalizationNumber(),req.getMedicalCategory(),
-                req.getMedicalPersonnel()).toJson();
+    // 1. 计算报销并保存
+    @Operation(summary = "计算并保存报销结果")
+    @PostMapping("/calculate")
+    public Restful.ResultJson calculateAndSave(@RequestBody InsuranceReimburseReq req) {
+        SettlementRecords record = new SettlementRecords();
+        BeanUtils.copyProperties(req, record);
+        // 特殊处理：将req中的medicalPersonnel映射到DO的medicalPersonnelCategory
+        record.setMedicalPersonnelCategory(req.getMedicalPersonnel());
+        return insuranceReimburseService.calculateAndSaveReimburse(record).toJson();
+    }
+
+    // 2. 查询报销记录
+    @Operation(summary = "查询报销记录")
+    @GetMapping("/query/{hospitalizationNumber}")
+    public Restful.ResultJson queryByHospitalNo(@PathVariable String hospitalizationNumber) {
+        return insuranceReimburseService.queryReimburseByHospitalNo(hospitalizationNumber).toJson();
+    }
+
+    // 3. 取消报销
+    @Operation(summary = "取消报销")
+    @PostMapping("/cancel")
+    public Restful.ResultJson cancelReimburse(@RequestBody InsuranceReimburseCancelReq req) {
+        SettlementRecords record = new SettlementRecords();
+        BeanUtils.copyProperties(req, record);
+        return insuranceReimburseService.cancelReimburse(record).toJson();
+    }
+
+    // 4. 确认支付
+    @Operation(summary = "确认支付")
+    @PostMapping("/pay")
+    public Restful.ResultJson confirmPayment(@RequestBody InsuranceReimbursePayReq req) {
+        return insuranceReimburseService.confirmPayment(req.getHospitalizationNumber()).toJson();
     }
 }
