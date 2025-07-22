@@ -11,9 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "综合查询",description = "医疗人员费用查询")
 @RequestMapping("/generalSearch")
@@ -26,7 +24,7 @@ public class GeneralSearchController {
 
     //查询人员信息及对应的单位信息
     @Operation(description = "查询人员信息及对应的单位信息,需传入身份证号")
-    @RequestMapping("/queryPeopleAndUnits")
+    @PostMapping("/queryPeopleAndUnits")
     public ResultJson queryPeopleAndUnits(@RequestBody QueryPeopleAndUnitsRequest request){
         return personService.queryPeopleAndUnits(request.getID()).toJson();
     }
