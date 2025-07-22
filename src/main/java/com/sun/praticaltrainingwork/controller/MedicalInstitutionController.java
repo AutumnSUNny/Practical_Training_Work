@@ -14,9 +14,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "定点医疗机构信息维护")
 @RequestMapping("/MedicalInstitution")
+@RestController
 @RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class MedicalInstitutionController {
 
