@@ -1,12 +1,18 @@
 package com.sun.praticaltrainingwork.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sun.praticaltrainingwork.domain.DO.*;
+import com.sun.praticaltrainingwork.domain.DTO.InsuranceReimburse.InsuranceReimburseQueryRequest;
 import com.sun.praticaltrainingwork.domain.Result;
 import com.sun.praticaltrainingwork.domain.VO.InsuranceReimburse.InsuranceReimburseVO;
+import com.sun.praticaltrainingwork.domain.VO.QueryVO;
 import com.sun.praticaltrainingwork.mapper.*;
 import com.sun.praticaltrainingwork.service.InsuranceReimburseService;
+import com.sun.praticaltrainingwork.util.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -15,6 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -187,5 +196,92 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
             return BigDecimal.ZERO;
         }
         return totalAmount.subtract(minAmount).multiply(ratio);
+    }
+
+    @Override
+    public Result<QueryVO<InsuranceReimburseVO>> queryReimburseByPage(InsuranceReimburseQueryRequest request) {
+        // 1. 解析分页参数（默认第1页，每页10条）
+        Integer pageNum = request.getPageNum() == null ? 1 : request.getPageNum();
+        Integer pageSize = request.getPageSize() == null ? 10 : request.getPageSize();
+        log.debug("开始查询报销记录，页码: {}, 每页大小: {}", pageNum, pageSize);
+
+        // 2. 初始化分页对象
+        Page<SettlementRecords> page = new Page<>(pageNum, pageSize);
+
+        // 3. 处理排序条件（支持多字段排序）
+        Map<String, Boolean> sorts = request.getSorts();
+        if (sorts != null && !sorts.isEmpty()) {
+            for (Map.Entry<String, Boolean> entry : sorts.entrySet()) {
+                // 驼峰转下划线（如createTime -> create_time）
+                String sortField = CommonUtils.camelToUnderline(entry.getKey());
+                boolean isAsc = entry.getValue();
+                OrderItem orderItem = new OrderItem();
+                orderItem.setColumn(sortField);
+                orderItem.setAsc(isAsc);
+                page.addOrder(orderItem);
+            }
+        } else {
+            // 默认排序：按创建时间降序（最新的在前）
+            OrderItem orderItem = new OrderItem();
+            orderItem.setColumn("id");
+            orderItem.setAsc(false);
+            page.addOrder(orderItem);
+        }
+
+        // 4. 构建查询条件（conditions为null时查询所有）
+        LambdaQueryWrapper<SettlementRecords> queryWrapper = new LambdaQueryWrapper<>();
+        InsuranceReimburseQueryRequest.Conditions conditions = request.getConditions();
+
+        if (conditions != null) {
+            // 住院号（精确匹配，因为唯一）
+            if (conditions.getHospitalizationNumber() != null && !conditions.getHospitalizationNumber().isEmpty()) {
+                queryWrapper.eq(SettlementRecords::getHospitalizationNumber, conditions.getHospitalizationNumber());
+            }
+            // 医疗类别（精确匹配）
+            if (conditions.getMedicalCategory() != null && !conditions.getMedicalCategory().isEmpty()) {
+                queryWrapper.eq(SettlementRecords::getMedicalCategory, conditions.getMedicalCategory());
+            }
+            // 人员类别（精确匹配）
+            if (conditions.getMedicalPersonnelCategory() != null && !conditions.getMedicalPersonnelCategory().isEmpty()) {
+                queryWrapper.eq(SettlementRecords::getMedicalPersonnelCategory, conditions.getMedicalPersonnelCategory());
+            }
+            // 医院等级（精确匹配）
+            if (conditions.getHospitalGrade() != null && !conditions.getHospitalGrade().isEmpty()) {
+                queryWrapper.eq(SettlementRecords::getHospitalGrade, conditions.getHospitalGrade());
+            }
+            // 状态（精确匹配）
+            if (conditions.getStatus() != null) {
+                queryWrapper.eq(SettlementRecords::getStatus, conditions.getStatus());
+            }
+            // 创建时间范围（between）
+            if (conditions.getCreateTimeStart() != null && conditions.getCreateTimeEnd() != null) {
+                queryWrapper.between(
+                        SettlementRecords::getCreateTime,
+                        conditions.getCreateTimeStart(),
+                        conditions.getCreateTimeEnd()
+                );
+            }
+        }
+
+        // 5. 执行分页查询
+        IPage<SettlementRecords> recordsPage = baseMapper.selectPage(page, queryWrapper);
+
+        // 6. 转换DO为VO并封装结果
+        List<InsuranceReimburseVO> voList = recordsPage.getRecords().stream()
+                .map(record -> {
+                    InsuranceReimburseVO vo = new InsuranceReimburseVO();
+                    BeanUtils.copyProperties(record, vo);
+                    return vo;
+                })
+                .collect(Collectors.toList());
+
+        QueryVO<InsuranceReimburseVO> queryVO = new QueryVO<>();
+        queryVO.setData(voList);
+        queryVO.setTotal(recordsPage.getTotal());
+        queryVO.setPageNum((int) recordsPage.getCurrent());
+        queryVO.setPageSize((int) recordsPage.getSize());
+
+        log.info("报销记录分页查询成功，共查询到 {} 条记录", recordsPage.getTotal());
+        return Result.success(queryVO);
     }
 }

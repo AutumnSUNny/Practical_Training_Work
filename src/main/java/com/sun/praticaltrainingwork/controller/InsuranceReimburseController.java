@@ -52,4 +52,10 @@ public class InsuranceReimburseController {
     public Restful.ResultJson confirmPayment(@RequestBody InsuranceReimbursePayReq req) {
         return insuranceReimburseService.confirmPayment(req.getHospitalizationNumber()).toJson();
     }
+
+    @Operation(summary = "分页查询报销记录（支持多条件筛选和排序）")
+    @PostMapping("/query")
+    public Restful.ResultJson queryByPage(@RequestBody InsuranceReimburseQueryRequest request) {
+        return insuranceReimburseService.queryReimburseByPage(request).toJson();
+    }
 }
