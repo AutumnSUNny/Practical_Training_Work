@@ -18,7 +18,7 @@ public class TSpecialApproval implements Serializable {
 
     private String approvalNumber;
 
-    private String personID;
+    private String personId;
 
     private String approvalCategory;
 
