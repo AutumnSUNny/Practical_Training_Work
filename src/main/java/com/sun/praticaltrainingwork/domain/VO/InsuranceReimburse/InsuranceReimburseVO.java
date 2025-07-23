@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InsuranceReimburseVO {
+    private Long id; // 新增：主键ID
     private String hospitalizationNumber; // 住院号
     private String peopleId; // 人员ID
     private BigDecimal totalAmount; // 总金额
