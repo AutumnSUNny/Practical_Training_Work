@@ -25,17 +25,15 @@ public class InsuranceReimburseController {
     public Restful.ResultJson calculateAndSave(@RequestBody InsuranceReimburseReq req) {
         SettlementRecords record = new SettlementRecords();
         BeanUtils.copyProperties(req, record);
-        // 特殊处理：将req中的medicalPersonnel映射到DO的medicalPersonnelCategory
-        record.setMedicalPersonnelCategory(req.getMedicalPersonnel());
         return insuranceReimburseService.calculateAndSaveReimburse(record).toJson();
     }
 
-    // 2. 查询报销记录
-    @Operation(summary = "查询报销记录")
-    @GetMapping("/query/{hospitalizationNumber}")
-    public Restful.ResultJson queryByHospitalNo(@PathVariable String hospitalizationNumber) {
-        return insuranceReimburseService.queryReimburseByHospitalNo(hospitalizationNumber).toJson();
-    }
+//    // 2. 查询报销记录
+//    @Operation(summary = "查询报销记录")
+//    @GetMapping("/query/{hospitalizationNumber}")
+//    public Restful.ResultJson queryByHospitalNo(@PathVariable String hospitalizationNumber) {
+//        return insuranceReimburseService.queryReimburseByHospitalNo(hospitalizationNumber).toJson();
+//    }
 
     // 3. 取消报销
     @Operation(summary = "取消报销")

@@ -25,7 +25,7 @@ public class SettlementRecords implements Serializable {
 
     private String medicalCategory; // 医疗类别
 
-    private String medicalPersonnelCategory; // 医疗人员类别
+    private String medicalPersonnel; // 医疗人员类别
 
     private BigDecimal totalAmount; // 总金额
 

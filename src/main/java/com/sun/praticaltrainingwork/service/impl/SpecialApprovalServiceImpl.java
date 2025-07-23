@@ -79,7 +79,7 @@ public class SpecialApprovalServiceImpl implements SpecialApprovalService {
         // 构建查询条件
         LambdaQueryWrapper<TSpecialApproval> queryWrapper = new LambdaQueryWrapper<>();
         // 模糊查询（文本类字段）
-        queryWrapper.like(conditions.getPersonID() != null, TSpecialApproval::getPersonID, conditions.getPersonID())
+        queryWrapper.like(conditions.getPersonID() != null, TSpecialApproval::getPersonId, conditions.getPersonID())
                 .like(conditions.getApprovalNumber() != null, TSpecialApproval::getApprovalNumber, conditions.getApprovalNumber())
                 .like(conditions.getDrugCode() != null, TSpecialApproval::getDrugCode, conditions.getDrugCode())
                 .like(conditions.getApprovalOpinions() != null, TSpecialApproval::getApprovalOpinions, conditions.getApprovalOpinions());

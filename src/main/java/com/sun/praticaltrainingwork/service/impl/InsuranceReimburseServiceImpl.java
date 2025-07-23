@@ -43,17 +43,20 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
         try {
             // 计算总金额
             BigDecimal totalAmount = calculateTotalAmount(record.getHospitalizationNumber());
+            if (totalAmount.compareTo(BigDecimal.ZERO) == 0) {
+                return Result.failure(new Exception("总金额计算错误"));
+            }
 
             // 获取起付标准和报销比例
             TMinimumPaymentStandard minStandard = getMinimumStandard(
                     record.getMedicalCategory(),
-                    record.getMedicalPersonnelCategory(),
+                    record.getMedicalPersonnel(),
                     record.getHospitalGrade()
             );
 
             TIndividualSegementSelfFundedRatio ratio = getReimbursementRatio(
                     record.getMedicalCategory(),
-                    record.getMedicalPersonnelCategory(),
+                    record.getMedicalPersonnel(),
                     record.getHospitalGrade()
             );
 
@@ -80,7 +83,6 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
             // 转换为VO
             InsuranceReimburseVO vo = new InsuranceReimburseVO();
             BeanUtils.copyProperties(record, vo);
-            vo.setMedicalPersonnel(record.getMedicalPersonnelCategory());
             return Result.success(vo);
 
         } catch (Exception e) {
@@ -109,38 +111,46 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result<String> cancelReimburse(SettlementRecords record) {
-        // 查询原记录
+        // 注意：原代码此处错误！查询原记录应使用主键ID，而非peopleId（一个人可能有多条记录）
+        // 修正1：通过主键ID查询原记录（确保唯一性）
         SettlementRecords original = baseMapper.selectById(record.getId());
         if (original == null) {
             return Result.failure(new Exception("记录不存在"));
         }
 
-        // 校验状态
+        // 获取住院号（从原记录中提取，无需前端传递）
+        String hospitalizationNumber = original.getHospitalizationNumber();
+        if (hospitalizationNumber == null || hospitalizationNumber.isEmpty()) {
+            return Result.failure(new Exception("原记录缺少住院号，无法取消"));
+        }
+
+        // 校验状态（仅有效状态可取消）
         if (original.getStatus() != 1) {
-            return Result.failure(new Exception("当前状态不允许取消"));
+            return Result.failure(new Exception("当前状态不允许取消（状态：" + original.getStatus() + "）"));
         }
 
-        // 校验时间
+        // 校验时间（未超过取消截止时间）
         if (LocalDateTime.now().isAfter(original.getCancelDeadline())) {
-            return Result.failure(new Exception("已超过取消截止时间"));
+            return Result.failure(new Exception("已超过取消截止时间（截止时间：" + original.getCancelDeadline() + "）"));
         }
 
-        // 创建负记录
+        // 创建负记录（补充住院号）
         SettlementNegativeRecords negativeRecord = new SettlementNegativeRecords();
         negativeRecord.setSettlementId(record.getId());
         negativeRecord.setNegativeAmount(original.getReimbursementAmount().negate());
         negativeRecord.setCreateTime(LocalDateTime.now());
-        negativeRecord.setRemark("报销取消");
+        negativeRecord.setRemark("报销取消（住院号：" + hospitalizationNumber + "）"); // 备注中添加住院号
         negativeMapper.insert(negativeRecord);
 
-        // 更新原记录状态
-        original.setStatus(2); // 已取消
+        // 更新原记录状态（同步记录住院号相关日志）
+        original.setStatus(2); // 2-已取消
         baseMapper.updateById(original);
 
+        log.info("住院号{}的报销记录已取消（人员ID：{}，记录ID：{}）",
+                hospitalizationNumber, original.getPeopleId(), original.getId());
 
-        return Result.success("取消报销成功");
+        return Result.success("取消报销成功（住院号：" + hospitalizationNumber + "）");
     }
-
     // 4. 确认支付
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -243,8 +253,8 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
                 queryWrapper.eq(SettlementRecords::getMedicalCategory, conditions.getMedicalCategory());
             }
             // 人员类别（精确匹配）
-            if (conditions.getMedicalPersonnelCategory() != null && !conditions.getMedicalPersonnelCategory().isEmpty()) {
-                queryWrapper.eq(SettlementRecords::getMedicalPersonnelCategory, conditions.getMedicalPersonnelCategory());
+            if (conditions.getMedicalPersonnel() != null && !conditions.getMedicalPersonnel().isEmpty()) {
+                queryWrapper.eq(SettlementRecords::getMedicalPersonnel, conditions.getMedicalPersonnel());
             }
             // 医院等级（精确匹配）
             if (conditions.getHospitalGrade() != null && !conditions.getHospitalGrade().isEmpty()) {
@@ -272,6 +282,8 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
                 .map(record -> {
                     InsuranceReimburseVO vo = new InsuranceReimburseVO();
                     BeanUtils.copyProperties(record, vo);
+                    // 确保id字段被复制（虽然BeanUtils会自动复制同名属性，但显式设置更安全）
+                    vo.setId(record.getId());
                     return vo;
                 })
                 .collect(Collectors.toList());
