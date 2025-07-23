@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ public class MedicalInstitutionController {
     private final MedicalInstitutionService institutionInformationService;
 
     @Operation(summary = "新增定点医疗机构信息")
-    @RequestMapping("/add")
+    @PostMapping("/add")
     public ResultJson addInstitutionInformation(@RequestBody MedicalInstitutionAddRequest request){
         TMedicalInsititution tmedicalInsititution = new TMedicalInsititution();
         BeanUtils.copyProperties(request,tmedicalInsititution);
@@ -33,7 +34,7 @@ public class MedicalInstitutionController {
     }
 
     @Operation(summary = "修改定点医疗机构信息")
-    @RequestMapping("/update")
+    @PostMapping("/update")
     public ResultJson updateInstitutionInformation(@RequestBody MedicalInstitutionUpdRequest request){
         TMedicalInsititution tmedicalInsititution = new TMedicalInsititution();
         BeanUtils.copyProperties(request,tmedicalInsititution);
@@ -41,13 +42,13 @@ public class MedicalInstitutionController {
     }
 
     @Operation(summary = "删除定点医疗机构信息")
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     public ResultJson deleteInstitutionInformation(@RequestBody MedicalInstitutionIdRequest request){
         return institutionInformationService.deleteInstitutionInformation(request.getId()).toJson();
     }
 
     @Operation(summary = "查询定点医疗机构信息")
-    @RequestMapping("/query")
+    @PostMapping("/query")
     public ResultJson queryInstitutionInformation(@RequestBody MedicalInstitutionListRequest request){
         return institutionInformationService.queryInstitutionInformation(request.getPageNum(), request.getPageSize(), request.getSorts(), request.getConditions()).toJson();
     }
