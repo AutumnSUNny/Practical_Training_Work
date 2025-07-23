@@ -17,7 +17,7 @@ public class SettlementNegativeRecords implements Serializable {
     @TableId(type = IdType.AUTO) // 自增主键
     private Long id; // 负记录ID
 
-    private Long settlementId; // 关联的结算记录ID（关联settlement_records.id）
+    private String hospitalizationNumber;
 
     private BigDecimal negativeAmount; // 负记录金额（与原报销金额绝对值相等、符号相反）
 

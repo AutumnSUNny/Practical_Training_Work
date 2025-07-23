@@ -111,17 +111,13 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result<String> cancelReimburse(SettlementRecords record) {
-        // 注意：原代码此处错误！查询原记录应使用主键ID，而非peopleId（一个人可能有多条记录）
-        // 修正1：通过主键ID查询原记录（确保唯一性）
-        SettlementRecords original = baseMapper.selectById(record.getId());
-        if (original == null) {
-            return Result.failure(new Exception("记录不存在"));
-        }
+        // 通过住院号查询原记录（住院号是唯一标识）
+        LambdaQueryWrapper<SettlementRecords> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SettlementRecords::getHospitalizationNumber, record.getHospitalizationNumber());
+        SettlementRecords original = baseMapper.selectOne(queryWrapper);
 
-        // 获取住院号（从原记录中提取，无需前端传递）
-        String hospitalizationNumber = original.getHospitalizationNumber();
-        if (hospitalizationNumber == null || hospitalizationNumber.isEmpty()) {
-            return Result.failure(new Exception("原记录缺少住院号，无法取消"));
+        if (original == null) {
+            return Result.failure(new Exception("记录不存在（住院号：" + record.getHospitalizationNumber() + "）"));
         }
 
         // 校验状态（仅有效状态可取消）
@@ -136,20 +132,19 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
 
         // 创建负记录（补充住院号）
         SettlementNegativeRecords negativeRecord = new SettlementNegativeRecords();
-        negativeRecord.setSettlementId(record.getId());
         negativeRecord.setNegativeAmount(original.getReimbursementAmount().negate());
         negativeRecord.setCreateTime(LocalDateTime.now());
-        negativeRecord.setRemark("报销取消（住院号：" + hospitalizationNumber + "）"); // 备注中添加住院号
+        negativeRecord.setRemark("报销取消（住院号：" + original.getHospitalizationNumber() + "）");
         negativeMapper.insert(negativeRecord);
 
-        // 更新原记录状态（同步记录住院号相关日志）
+        // 更新原记录状态
         original.setStatus(2); // 2-已取消
         baseMapper.updateById(original);
 
         log.info("住院号{}的报销记录已取消（人员ID：{}，记录ID：{}）",
-                hospitalizationNumber, original.getPeopleId(), original.getId());
+                original.getHospitalizationNumber(), original.getPeopleId(), original.getId());
 
-        return Result.success("取消报销成功（住院号：" + hospitalizationNumber + "）");
+        return Result.success("取消报销成功（住院号：" + original.getHospitalizationNumber() + "）");
     }
     // 4. 确认支付
     @Override
