@@ -53,6 +53,7 @@ public class InsuranceReimburseController {
         return insuranceReimburseService.confirmPayment(req.getHospitalizationNumber()).toJson();
     }
 
+    //查询所有报销记录
     @Operation(summary = "分页查询报销记录（支持多条件筛选和排序）")
     @PostMapping("/query")
     public Restful.ResultJson queryByPage(@RequestBody InsuranceReimburseQueryRequest request) {

@@ -80,6 +80,7 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
             // 转换为VO
             InsuranceReimburseVO vo = new InsuranceReimburseVO();
             BeanUtils.copyProperties(record, vo);
+            vo.setMedicalPersonnel(record.getMedicalPersonnelCategory());
             return Result.success(vo);
 
         } catch (Exception e) {

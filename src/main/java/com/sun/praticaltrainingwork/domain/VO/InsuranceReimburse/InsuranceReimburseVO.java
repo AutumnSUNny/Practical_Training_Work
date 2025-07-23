@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class InsuranceReimburseVO {
     private String hospitalizationNumber; // 住院号
-    private Integer peopleId; // 人员ID
+    private String peopleId; // 人员ID
     private BigDecimal totalAmount; // 总金额
     private BigDecimal reimbursementAmount; // 报销金额
     private BigDecimal personalPay; // 个人自费
