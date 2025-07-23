@@ -25,8 +25,6 @@ public class InsuranceReimburseController {
     public Restful.ResultJson calculateAndSave(@RequestBody InsuranceReimburseReq req) {
         SettlementRecords record = new SettlementRecords();
         BeanUtils.copyProperties(req, record);
-        // 特殊处理：将req中的medicalPersonnel映射到DO的medicalPersonnelCategory
-        record.setMedicalPersonnelCategory(req.getMedicalPersonnel());
         return insuranceReimburseService.calculateAndSaveReimburse(record).toJson();
     }
 

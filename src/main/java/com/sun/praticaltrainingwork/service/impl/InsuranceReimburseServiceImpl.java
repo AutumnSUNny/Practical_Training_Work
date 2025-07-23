@@ -43,17 +43,20 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
         try {
             // 计算总金额
             BigDecimal totalAmount = calculateTotalAmount(record.getHospitalizationNumber());
+            if (totalAmount.compareTo(BigDecimal.ZERO) == 0) {
+                return Result.failure(new Exception("总金额计算错误"));
+            }
 
             // 获取起付标准和报销比例
             TMinimumPaymentStandard minStandard = getMinimumStandard(
                     record.getMedicalCategory(),
-                    record.getMedicalPersonnelCategory(),
+                    record.getMedicalPersonnel(),
                     record.getHospitalGrade()
             );
 
             TIndividualSegementSelfFundedRatio ratio = getReimbursementRatio(
                     record.getMedicalCategory(),
-                    record.getMedicalPersonnelCategory(),
+                    record.getMedicalPersonnel(),
                     record.getHospitalGrade()
             );
 
@@ -80,7 +83,6 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
             // 转换为VO
             InsuranceReimburseVO vo = new InsuranceReimburseVO();
             BeanUtils.copyProperties(record, vo);
-            vo.setMedicalPersonnel(record.getMedicalPersonnelCategory());
             return Result.success(vo);
 
         } catch (Exception e) {
@@ -243,8 +245,8 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
                 queryWrapper.eq(SettlementRecords::getMedicalCategory, conditions.getMedicalCategory());
             }
             // 人员类别（精确匹配）
-            if (conditions.getMedicalPersonnelCategory() != null && !conditions.getMedicalPersonnelCategory().isEmpty()) {
-                queryWrapper.eq(SettlementRecords::getMedicalPersonnelCategory, conditions.getMedicalPersonnelCategory());
+            if (conditions.getMedicalPersonnel() != null && !conditions.getMedicalPersonnel().isEmpty()) {
+                queryWrapper.eq(SettlementRecords::getMedicalPersonnel, conditions.getMedicalPersonnel());
             }
             // 医院等级（精确匹配）
             if (conditions.getHospitalGrade() != null && !conditions.getHospitalGrade().isEmpty()) {

@@ -19,7 +19,7 @@ public class InsuranceReimburseQueryRequest {
     public static class Conditions {
         private String hospitalizationNumber; // 住院号（精确匹配）
         private String medicalCategory;       // 医疗类别
-        private String medicalPersonnelCategory; // 人员类别
+        private String medicalPersonnel; // 人员类别
         private String hospitalGrade;         // 医院等级
         private Integer status;               // 状态（1-有效，2-已取消，3-已支付）
         private LocalDateTime createTimeStart; // 创建时间范围-开始
