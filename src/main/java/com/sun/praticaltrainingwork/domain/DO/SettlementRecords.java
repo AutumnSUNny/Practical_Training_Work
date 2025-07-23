@@ -19,7 +19,7 @@ public class SettlementRecords implements Serializable {
 
     private String hospitalizationNumber; // 住院号
 
-    private Integer peopleId; // 人员ID
+    private String peopleId; // 人员ID
 
     private String hospitalGrade; // 医院等级
 
