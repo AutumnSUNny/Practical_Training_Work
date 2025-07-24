@@ -73,8 +73,8 @@ public class PersonnelVisitsInfoServiceImpl implements PersonnelVisitsInfoServic
 
         if (conditions != null) {
             // 人员ID精确查询
-            if (conditions.getPersonID() != null) {
-                queryWrapper.eq(TPersonnelVisitsInfo::getPersonID, conditions.getPersonID());
+            if (conditions.getPersonId() != null) {
+                queryWrapper.eq(TPersonnelVisitsInfo::getPersonId, conditions.getPersonId());
             }
             // 住院号模糊查询
             if (conditions.getHospitalizationNumber() != null) {

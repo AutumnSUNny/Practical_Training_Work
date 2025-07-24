@@ -134,7 +134,8 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
         SettlementNegativeRecords negativeRecord = new SettlementNegativeRecords();
         negativeRecord.setNegativeAmount(original.getReimbursementAmount().negate());
         negativeRecord.setCreateTime(LocalDateTime.now());
-        negativeRecord.setRemark("报销取消（住院号：" + original.getHospitalizationNumber() + "）");
+        negativeRecord.setRemark("报销取消");
+        negativeRecord.setHospitalizationNumber(record.getHospitalizationNumber());
         negativeMapper.insert(negativeRecord);
 
         // 更新原记录状态

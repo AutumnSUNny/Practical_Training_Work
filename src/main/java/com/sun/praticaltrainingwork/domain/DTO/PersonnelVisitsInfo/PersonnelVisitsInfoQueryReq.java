@@ -33,7 +33,7 @@ public class PersonnelVisitsInfoQueryReq {
     public static class Conditions {  // 修改为static，避免外部无法实例化
         @Nullable
         @Schema(description = "人员ID")
-        private String personID;
+        private String personId;
 
         @Nullable
         @Schema(description = "住院号")

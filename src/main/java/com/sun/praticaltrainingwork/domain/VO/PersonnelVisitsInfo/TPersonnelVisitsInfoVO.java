@@ -8,7 +8,7 @@ import java.util.Date;
 public class TPersonnelVisitsInfoVO {
     private Integer id;
 
-    private String personID;
+    private String personId;
 
     private String hospitalizationNumber;
 

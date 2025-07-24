@@ -18,7 +18,7 @@ public class TPersonnelVisitsInfo implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    private String personID;
+    private String personId;
 
     private String hospitalizationNumber;
 
