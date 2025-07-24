@@ -17,6 +17,7 @@ public class InsuranceReimburseQueryRequest {
     // 筛选条件内部类
     @Data
     public static class Conditions {
+        private String peopleId;
         private String hospitalizationNumber; // 住院号（精确匹配）
         private String medicalCategory;       // 医疗类别
         private String medicalPersonnel; // 人员类别

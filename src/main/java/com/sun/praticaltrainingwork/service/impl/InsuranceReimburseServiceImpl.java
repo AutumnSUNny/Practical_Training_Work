@@ -244,6 +244,9 @@ public class InsuranceReimburseServiceImpl extends ServiceImpl<SettlementRecords
             if (conditions.getHospitalizationNumber() != null && !conditions.getHospitalizationNumber().isEmpty()) {
                 queryWrapper.eq(SettlementRecords::getHospitalizationNumber, conditions.getHospitalizationNumber());
             }
+            if (conditions.getPeopleId() != null) {
+                queryWrapper.eq(SettlementRecords::getPeopleId, conditions.getPeopleId());
+            }
             // 医疗类别（精确匹配）
             if (conditions.getMedicalCategory() != null && !conditions.getMedicalCategory().isEmpty()) {
                 queryWrapper.eq(SettlementRecords::getMedicalCategory, conditions.getMedicalCategory());
