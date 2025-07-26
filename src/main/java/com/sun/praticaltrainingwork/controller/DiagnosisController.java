@@ -33,6 +33,7 @@ public class DiagnosisController {
     public ResultJson addDiagnosis(@RequestBody DiagnosisAddRequest request) {
         TDiagnosisProject tdiagnosisproject = new TDiagnosisProject();
         BeanUtils.copyProperties(request, tdiagnosisproject);
+        System.out.println("hh");
         return diagnosisService.addDiagnosis(tdiagnosisproject).toJson();
     }
 
